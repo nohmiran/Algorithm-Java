@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="
+	http://mybatis.org/schema/mybatis-spring
+	http://mybatis.org/schema/mybatis-spring.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- DB연결 (JDBC = Connection) API -->
+	<!-- HikariCP API : 스프링에서 제공해주는 AIP는 아니지만 Database성능을 위해서 사용한다.
+	커넥션 여러개를 재활용해서 개선시켜주는 AIP -->
+
+	<bean id = "hikariConfig" class = "com.zaxxer.hikari.HikariConfig">
+	    <property name = "driverClassName" value = "com.mysql.jdbc.Driver"/>
+	    <property name = "jdbcUrl" value = "jdbc:mysql://localhost:3306/mysql"/>
+	    <property name = "username" value = "root"/>
+	    <property name = "password" value = "12345"/>
+	</bean>
+
+	
+	<bean id = "dataSource" class = "com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	    <constructor-arg ref = "hikariConfig"/>
+	</bean>
+	
+	<!-- mybatis-spring API (Spring bridge for MyBatis sql mapping framework)-->
+	<bean class = "org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref = "dataSource"/>  
+	</bean>	
+	
+	<!-- SqlSessionFactoryBean와 BoardMapper(SQL) 연결 -->
+	<mybatis:scan base-package="kr.board.mapper"/>
+	
+	
+</beans>
