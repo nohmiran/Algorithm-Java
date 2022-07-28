@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.board.domain.Board;
 import kr.board.mapper.BoardMapper;
@@ -96,8 +97,11 @@ public class BoardController { // -> new BoardController();
 		}
 	
 	@RequestMapping("/boardListAjax.do")
-	public String boardListAjax() {
+	public @ResponseBody List<Board> boardListAjax() {
+		List<Board> list = mapper.boardList();
 		// 여기서 json data format으로 응답을 해야한다.
+		// List<Board> --> Gson API --> String(JSON)
+		return list; // List<Board> --> jackson --> String(JSON)
 		
 	}
 	
