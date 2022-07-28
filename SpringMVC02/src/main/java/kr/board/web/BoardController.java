@@ -102,8 +102,7 @@ public class BoardController { // -> new BoardController();
 		// 여기서 json data format으로 응답을 해야한다.
 		// List<Board> --> Gson API --> String(JSON)
 		return list; // List<Board> --> jackson --> String(JSON)
-		
-	}
+		}	
 	
 	
 }
