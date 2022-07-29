@@ -96,6 +96,7 @@ public class BoardController { // -> new BoardController();
 		return "redirect:/boardList.do";
 		}
 	
+	// 글 목록
 	@RequestMapping("/boardListAjax.do")
 	public @ResponseBody List<Board> boardListAjax() {
 		List<Board> list = mapper.boardList();
@@ -104,5 +105,10 @@ public class BoardController { // -> new BoardController();
 		return list; // List<Board> --> jackson --> String(JSON)
 		}	
 	
+	// 글쓰기
+	@RequestMapping("/boardInsertAjax.do")
+	public @ResponseBody void boardInsertAjax(Board vo) {
+		mapper.boardInsert(vo);
+	}
 	
 }

@@ -71,6 +71,25 @@
 				$(".rform").slideDown();
 			}
 		}
+		// 글쓰기 화면의 글쓰기 버튼을 눌렀을 때 게시물이 올라가도록 하는 함수 goInsert
+		function goInsert(){ // title, contents, writer
+			//var title = $("#title").val();
+			//var contents = $("#contents").val();
+			//var writer = $("#writer").val();
+			
+			var fData = $("#frm").serialize(); // serialize -> form안에 있는 파라미터를 한 번에 가져오는 함수
+			$.ajax({
+				url : "boardInsertAjax.do",
+				type : "post",
+				data : fData,
+				success : loadList,
+				error : function(){alert("error");}
+			});
+			// 글쓰기 완료시 글쓰기 창이 숨겨지도록.
+			$(".rform").css("display","none");
+			
+		}
+		
 	</script>	
 </head>
 
@@ -82,10 +101,10 @@
 			<div class="panel-heading">SPRING BOARD</div>
 			<div class="panel-body blist">Panel Content</div>
 			
-			<br/>
 			<div class="panel-body rform" style = "display: none">
+			
 			<!-- 글쓰기 화면 -->
-			<form class="form-horizontal" action="/web/boardInsert.do" method="post">
+			<form id = "frm" class="form-horizontal" method="post">
 		  <div class="form-group">
 		    <label class="control-label col-sm-2" for="title">제목:</label>
 		    <div class="col-sm-10">
@@ -109,7 +128,7 @@
 		  	  
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-success btn-sm">글쓰기</button>
+		      <button type="button" class="btn btn-success btn-sm" onclick = "goInsert()">글쓰기</button>
 		      <button type="reset" class="btn btn-warning btn-sm">취소</button>
 		    </div>
 		  </div>
