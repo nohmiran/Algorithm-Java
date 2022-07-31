@@ -3,6 +3,7 @@ package kr.board.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Update;
 
 import kr.board.domain.Board;
 
@@ -36,4 +37,13 @@ public interface BoardMapper {
 	
 	// 게시물 수정
 	public void boardUpdate(Board vo); // SQL(update~)
+
+	// MVC02 게시글 수정
+	@Update("update board set contents=#{contents} where idx=#{idx}")
+	public void boardContentUpdateAjax(Board vo);
+
+	// MVC02 제목 작성자 수정
+	@Update("update board set title=#{title},writer=#{writer} where idx=#{idx}")
+	public void boardTWUpdateAjax(Board vo);
+
 }

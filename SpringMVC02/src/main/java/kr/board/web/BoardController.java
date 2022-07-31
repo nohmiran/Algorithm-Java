@@ -111,4 +111,23 @@ public class BoardController { // -> new BoardController();
 		mapper.boardInsert(vo);
 	}
 	
+	// 게시글 수정하기
+	@RequestMapping("/boardContentUpdateAjax.do")
+	public @ResponseBody void boardContentUpdateAjax(Board vo) { // 두개 이상이기 때문에 vo로
+		mapper.boardContentUpdateAjax(vo);
+	}
+	
+	// 게시물 리스트에서 삭제하기
+	@RequestMapping("/boardDeleteAjax.do")
+	public @ResponseBody void boardDeleteAjax(int idx) {
+		mapper.boardDelete(idx);
+	}
+	
+	// 게시물 리스트에서 제목과 작성자 수정하기
+	@RequestMapping("/boardTWUpdateAjax.do")
+	public @ResponseBody void boardTWUpdateAjax(Board vo) {
+		mapper.boardTWUpdateAjax(vo);
+	}
+	
+	
 }
