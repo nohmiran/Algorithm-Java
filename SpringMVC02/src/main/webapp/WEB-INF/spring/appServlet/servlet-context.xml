@@ -29,8 +29,8 @@
 	</beans:bean>
 
 	<!-- scan으로 Controller(POJO)를 객체생성하는 부분 -->
-	<context:component-scan
-		base-package="kr.board.web" />
+	<context:component-scan base-package="kr.board.web" />
+	<context:component-scan base-package="kr.board.service" />
 
 
 
