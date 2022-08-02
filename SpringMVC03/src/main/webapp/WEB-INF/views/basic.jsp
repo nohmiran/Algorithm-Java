@@ -112,9 +112,6 @@
 
 	// 글쓰기 화면의 글쓰기 버튼을 눌렀을 때 게시물이 올라가도록 하는 함수 goInsert==============================
 	function goInsert() { // title, contents, writer
-		//var title = $("#title").val();
-		//var contents = $("#contents").val();
-		//var writer = $("#writer").val();
 
 		var fData = $("#frm").serialize(); // serialize -> form안에 있는 파라미터를 한 번에 가져오는 함수
 		$.ajax({
@@ -126,11 +123,6 @@
 				alert("error");
 			}
 		});
-
-		// null("")로 초기화
-		//$("#title").val(""); 
-		//$("#contents").val(""); 
-		//$("#writer").val("");
 
 		// 취소 버튼을 강제로 클릭하기
 		$(".cancel").trigger("click");
@@ -146,7 +138,6 @@
 		} else {
 			$("#cv" + idx).css("display", "none");
 		}
-
 	}
 
 	// 닫기 버튼을 눌렀을 때 수정창이 닫아지는 함수goClose()===========================================

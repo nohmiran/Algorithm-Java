@@ -18,7 +18,7 @@ public class BoardRestController { // OpenAPI-JSON
 
 	// 글 목록
 	@RequestMapping("/boardListAjax.do")
-	public List<Board> boardListAjax() { // ResponseBody는 컨트롤러x, jsp x, Ajax o!
+	public List<Board> boardListAjax() {
 		List<Board> list = service.boardListAjax();
 		// 여기서 json data format으로 응답을 해야한다.
 		// List<Board> --> Gson API --> String(JSON)
