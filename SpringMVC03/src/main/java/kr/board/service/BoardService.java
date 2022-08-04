@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.board.domain.Board;
+import kr.board.domain.Member;
 import kr.board.mapper.BoardMapper;
 
 @Service
@@ -39,6 +40,11 @@ public class BoardService {
 	// 게시물 리스트에서 제목과 작성자 수정하기
 	public void boardTWUpdateAjax(Board vo) {
 		mapper.boardTWUpdateAjax(vo);
+	}
+	
+	// 로그인
+	public Member login(Member vo) {
+		return mapper.login(vo);
 	}
 
 }

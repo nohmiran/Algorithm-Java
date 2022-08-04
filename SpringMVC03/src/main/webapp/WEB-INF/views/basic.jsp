@@ -217,25 +217,37 @@
 </script>
 </head>
 
-<body>
 
+<body>
 	<div class="container">
 		<h2>Spring WEB MVC03(+회원인증)</h2>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-			
-			<!-- inlineform(로그인 ) -->
-				<form class="form-inline" action="/action_page.php">
-					<div class="form-group">
-						<label for="memId">아이디:</label> 
-						<input type="text" class="form-control" name="memId" id="memId">
-					</div>
-					<div class="form-group">
-						<label for="memPass">패스워드:</label> 
-						<input type="password" class="form-control" name="memPass" id="memPass">
-					</div>
-					<button type="submit" class="btn btn-default">로그인</button>
-				</form>
+
+				<!-- 회원인증에 실패했을 때 -->
+				<c:if test="${empty mvo}">
+					<form class="form-inline" action="/web/login.do" method="post">
+						<div class="form-group">
+							<label for="memId">아이디:</label> <input type="text"
+								class="form-control" name="memId" id="memId">
+						</div>
+						<div class="form-group">
+							<label for="memPass">패스워드:</label> <input type="password"
+								class="form-control" name="memPass" id="memPass">
+						</div>
+						<button type="submit" class="btn btn-default">로그인</button>
+					</form>
+				</c:if>
+
+				<!-- 회원인증에 성공했을 때 -->
+				<c:if test="${!empty mvo}">
+					<form action="/web/logout.do" method="post">
+						<div class="form-group">
+							<label>${mvo.memName}님 방문을 환영합니다!</label>
+							<button class="btn btn-info btn-sm">로그아웃</button>
+						</div>
+					</form>
+				</c:if>
 
 			</div>
 			<div class="panel-body blist">Panel Content</div>

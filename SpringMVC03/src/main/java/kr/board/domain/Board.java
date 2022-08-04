@@ -1,5 +1,8 @@
 package kr.board.domain;
 
+import lombok.Data;
+
+@Data  // lombok API
 public class Board { // lombok(롬복)
 
 	// property(프로퍼티, 속성)

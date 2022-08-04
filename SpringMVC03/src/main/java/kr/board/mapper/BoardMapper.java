@@ -3,9 +3,11 @@ package kr.board.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.board.domain.Board;
+import kr.board.domain.Member;
 
 //JDBC -> CRUD기능 
 //1. Java + SQL 혼합된 형태 : 유지보수가 어렵다.
@@ -46,4 +48,8 @@ public interface BoardMapper {
 	@Update("update board set title=#{title},writer=#{writer} where idx=#{idx}")
 	public void boardTWUpdateAjax(Board vo);
 
+	// MVC03 로그인
+	@Select("select * from member where memId=#{memId} and memPass=#{memPass}")
+	public Member login(Member vo);
+	
 }
