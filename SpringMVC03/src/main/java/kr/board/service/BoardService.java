@@ -47,4 +47,14 @@ public class BoardService {
 		return mapper.login(vo);
 	}
 
+	// 조회수
+	public Board boardCountAjax(int idx) {
+		// 1. 조회수를 업데이트해주고
+		mapper.boardCountAjax(idx);
+		
+		// 2. 다시 게시판 정보를 가져온다.
+
+		return null;
+	}
+
 }

@@ -13,8 +13,8 @@
 	<!-- 게시물 쓰기 -->
 	<insert id="boardInsert" 
 	    	parameterType="kr.board.domain.Board">	    
-	insert into board(title, contents, writer)
-	values(#{title}, #{contents}, #{writer})
+	insert into board(memId, title, contents, writer)
+	values(#{memId}, #{title}, #{contents}, #{writer})
 	</insert>
 	
 	<!-- 게시물 상세보기 -->

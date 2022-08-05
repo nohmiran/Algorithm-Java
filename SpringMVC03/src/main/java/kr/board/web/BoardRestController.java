@@ -48,5 +48,12 @@ public class BoardRestController { // OpenAPI-JSON
 	public void boardTWUpdateAjax(Board vo) {
 		service.boardTWUpdateAjax(vo);
 	}
+	
+	// 게시물 조회수 올리기
+	@RequestMapping("/boardCountAjax.do")
+	public Board boardCountAjax(int idx) { // 글의 인덱스를 매개변수로 받는다.
+		Board vo = service.boardCountAjax(idx);
+		return vo; // 게시판정보를 리턴해준다(json형태) -> { , , , ,"count":조회수 몇~}
+	}
 
 }

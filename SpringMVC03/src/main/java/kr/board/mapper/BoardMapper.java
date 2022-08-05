@@ -51,5 +51,9 @@ public interface BoardMapper {
 	// MVC03 로그인
 	@Select("select * from member where memId=#{memId} and memPass=#{memPass}")
 	public Member login(Member vo);
+
+	// MVC03 조회수
+	@Update("update board set count = count+1 where idx+#{idx}")
+	public void boardCountAjax(int idx);
 	
 }

@@ -49,51 +49,60 @@
 		blist += "</tr>";
 
 		// 반복문을 사용해서 게시물을 한개씩 꺼내온다.
-		$
-				.each(
-						data,
-						function(index, obj) {
+		$.each(data,function(index, obj) {
 							blist += "<tr>";
 							blist += "<td>" + obj.idx + "</td>";
-							blist += "<td id='t"+obj.idx+"'><a href = 'javascript:goContent(﻿"
-									+ obj.idx + ")'>" + obj.title + "</a></td>";
-							blist += "<td id='w"+obj.idx+"'>" + obj.writer
-									+ "</td>";
+							blist += "<td id='t"+obj.idx+"'><a href = 'javascript:goContent(﻿"+ obj.idx + ")'>" + obj.title + "</a></td>";
+							blist += "<td id='w"+obj.idx+"'>" + obj.writer + "</td>";
 							blist += "<td>" + obj.indate + "</td>";
-							blist += "<td>" + obj.count + "</td>";
+							blist += "<td id = 'count"+obj.idx+"'>" + obj.count + "</td>";
 
-							blist += "<td id='u"+obj.idx+"'><button class = 'btn btn-info btn-sm' onclick='goUpdate("
-									+ obj.idx + ")'>수정</button></td>";
-							blist += "<td><button class = 'btn btn-warning btn-sm' onclick='goDelete("
-									+ obj.idx + ")'>삭제</button></td>";
-
+							if(${!empty mvo}){ <!-- 로그인에 성공했을 때 -->
+								if("${mvo.memId}"==obj.memId){ <!-- 로그인한 아이디 == 게시글 작성한 아이디 -->
+									blist += "<td id='u"+obj.idx+"'><button class = 'btn btn-info btn-sm' onclick='goUpdate("+ obj.idx + ")'>수정</button></td>";
+									blist += "<td><button class = 'btn btn-warning btn-sm' onclick='goDelete("+ obj.idx + ")'>삭제</button></td>";
+								}else{ <!-- 로그인한 아이디 != 게시글 작성한 아이디 -->
+									blist += "<td id='u"+obj.idx+"'><button disabled class = 'btn btn-info btn-sm' onclick='goUpdate("+ obj.idx + ")'>수정</button></td>";
+									blist += "<td><button disabled class = 'btn btn-warning btn-sm' onclick='goDelete("+ obj.idx + ")'>삭제</button></td>";
+								}
+							}else{ <!-- 로그인에 실패했을 때 -->
+							blist += "<td id='u"+obj.idx+"'><button disabled class = 'btn btn-info btn-sm' onclick='goUpdate("+ obj.idx + ")'>수정</button></td>";
+							blist += "<td><button disabled class = 'btn btn-warning btn-sm' onclick='goDelete("+ obj.idx + ")'>삭제</button></td>";
+							}
+									
 							blist += "</tr>";
 
 							// 제목을 눌렀을 때 내용을 볼 수 있도록!
 							blist += "<tr id='cv"+﻿obj.idx+"' style='display:none'>";
 							blist += "<td>내용</td>";
-							blist += "<td colspan='6'><textarea rows='7' id = 'c"+obj.idx+"' class = 'form-control'>"
-									+ obj.contents + "</textarea>";
+							blist += "<td colspan='6'><textarea rows='7' id = 'c"+obj.idx+"' class = 'form-control'>"+ obj.contents + "</textarea>";
 
 							blist += "<br/>";
-							blist += "<button class = 'btn btn-info btn-sm' onclick='upClick("
-									+ obj.idx + ")' >수정</button>";
+							
+							if("${mvo.memId}"==obj.memId){
+								blist += "<button class = 'btn btn-info btn-sm' onclick='upClick("+ obj.idx + ")'>수정</button>";
+							}else{
+								blist += "<button disabled class = 'btn btn-info btn-sm' onclick='upClick("+ obj.idx + ")'>수정</button>";
+							}
 							blist += "&nbsp;<button class = 'btn btn-warning btn-sm'>취소</button>";
-							blist += "&nbsp;<button class = 'btn btn-danger btn-sm' onclick='goClose("
-									+ obj.idx + ")'>닫기</button>";
+							blist += "&nbsp;<button class = 'btn btn-danger btn-sm' onclick='goClose("+ obj.idx + ")'>닫기</button>";
 
 							blist += "</td>";
 							blist += "</tr>";
 
 						});
 
+		if(${!empty mvo}){ // 로그인을 성공했다면
+			
 		// 글쓰기 버튼
-		blist += "<tr>";
-		blist += "<td colspan = '7'>";
-		blist += "<button class = 'btn btn-primary btn-sm' onclick = 'goForm()'>글쓰기</button>";
-		blist += "</td>";
-		blist += "</tr>";
-
+			blist += "<tr>";
+			blist += "<td colspan = '7'>";
+			blist += "<button class = 'btn btn-primary btn-sm' onclick = 'goForm()'>글쓰기</button>";
+			blist += "</td>";
+			blist += "</tr>";
+		
+		}
+		
 		blist += "</table>"
 		// $ 선택자를 이용해서 blist의 div를 찾아가도록 만든다
 		$(".blist").html(blist);
@@ -137,6 +146,18 @@
 			$("#cv" + idx).css("display", "table-row"); //-> block보다 table-row가 내용칸을 더 넓게 보여준다.
 		} else {
 			$("#cv" + idx).css("display", "none");
+		}
+		
+		// 조회수 누적
+		if($("#cv" + idx).css("display") != "none") { // != "none" -> display가 열려있는 경우
+			$.ajax({
+				url : "/web/boardCountAjax.do", // boardCountAjax.do로 가자
+				type : "get",
+				data : {"idx" : idx}, // 사용자가 누른 idx를 count를 업데이트해줘
+				dataTyep : "json",
+				success : function(data){$("#count"+idx.text(data.count);}, // data = 조회수
+				error : function(){alert("error");}
+			});
 		}
 	}
 
@@ -228,12 +249,10 @@
 				<c:if test="${empty mvo}">
 					<form class="form-inline" action="/web/login.do" method="post">
 						<div class="form-group">
-							<label for="memId">아이디:</label> <input type="text"
-								class="form-control" name="memId" id="memId">
+							<label for="memId">아이디:</label> <input type="text" class="form-control" name="memId" id="memId">
 						</div>
 						<div class="form-group">
-							<label for="memPass">패스워드:</label> <input type="password"
-								class="form-control" name="memPass" id="memPass">
+							<label for="memPass">패스워드:</label> <input type="password" class="form-control" name="memPass" id="memPass">
 						</div>
 						<button type="submit" class="btn btn-default">로그인</button>
 					</form>
@@ -256,34 +275,31 @@
 
 				<!-- 글쓰기 화면 -->
 				<form id="frm" class="form-horizontal" method="post">
+					<input type="hidden" name="memId" value="${mvo.memId}">
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="title">제목:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="title" name="title"
-								placeholder="Enter title">
+							<input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="contents">내용:</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="5" id="contents"
-								name="contents"></textarea>
+							<textarea class="form-control" rows="5" id="contents" name="contents"></textarea>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="writer">작성자:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="writer" name="writer"
-								placeholder="Enter writer">
+							<input type="text" class="form-control" id="writer" name="writer" placeholder="Enter writer" value="${mvo.memName}" readonly="readonly">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="button" class="btn btn-success btn-sm"
-								onclick="goInsert()">글쓰기</button>
+							<button type="button" class="btn btn-success btn-sm "onclick="goInsert()">글쓰기</button>
 							<button type="reset" class="btn btn-warning btn-sm cancel">취소</button>
 						</div>
 					</div>
