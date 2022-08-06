@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.board.domain.Board;
-import kr.board.mapper.BoardMapper;
 import kr.board.service.BoardService;
 
 @RestController
@@ -43,7 +42,7 @@ public class BoardRestController { // OpenAPI-JSON
 		service.boardDeleteAjax(idx);
 	}
 	
-	// 게시물 리스트에서 제목과 작성자 수정하기
+	// 게시물 리스트에서 제목(Title)과 작성자(Writer) 수정하기
 	@RequestMapping("/boardTWUpdateAjax.do")
 	public void boardTWUpdateAjax(Board vo) {
 		service.boardTWUpdateAjax(vo);

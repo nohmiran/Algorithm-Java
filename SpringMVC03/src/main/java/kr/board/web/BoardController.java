@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.board.domain.Member;
-import kr.board.mapper.BoardMapper;
 import kr.board.service.BoardService;
 
 @Controller // POJO
@@ -24,7 +23,7 @@ public class BoardController { // -> new BoardController();
 	}
 	
 	// 로그인
-	@RequestMapping("/login.do")
+	@RequestMapping("login.do")
 	public String login(Member vo, HttpSession session) { // memId, memPass
 		
 		Member mvo = service.login(vo); // 서비스 호출

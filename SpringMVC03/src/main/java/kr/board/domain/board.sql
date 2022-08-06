@@ -32,3 +32,5 @@ insert into member values('smhrd2', '1234', '예스맨2');
 insert into member values('smhrd3', '1234', '예스맨3');
 
 select * from member;
+
+

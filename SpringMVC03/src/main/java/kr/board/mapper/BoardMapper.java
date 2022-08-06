@@ -53,7 +53,7 @@ public interface BoardMapper {
 	public Member login(Member vo);
 
 	// MVC03 조회수
-	@Update("update board set count = count+1 where idx+#{idx}")
+	@Update("update board set count=count+1 where idx=#{idx}")
 	public void boardCountAjax(int idx);
 	
 }

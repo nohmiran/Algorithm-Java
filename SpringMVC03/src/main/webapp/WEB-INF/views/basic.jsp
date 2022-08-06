@@ -15,11 +15,31 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+	
 	$(document).ready(function() {
 		// 서버와 통신($.ajax())
 		loadList();
-
+	
 	});
+
+
+	function upClick(idx) {// idx, contents 두 개 필요!
+		var contents = $("#c" + idx).val();
+		$.ajax({
+			url : "boardContentUpdateAjax.do",
+			type : "post",
+			data : {
+				"idx" : idx,
+				"contents" : contents
+			},
+			succes : loadList,
+			error : function() {
+				alert("error");
+			}
+		});
+
+	}
+	
 	function loadList() {
 		$.ajax({
 			url : "boardListAjax.do",
@@ -32,7 +52,7 @@
 			}
 		});
 	}
-	// 								0	 	 1		  2
+//		0	 	 1		  2
 	function listView(data) { // [{board}, {board}, {board}]
 		// 동적으로 게시판을 만들기
 		var blist = "<table class='table table-hover'>";
@@ -49,7 +69,9 @@
 		blist += "</tr>";
 
 		// 반복문을 사용해서 게시물을 한개씩 꺼내온다.
-		$.each(data,function(index, obj) {
+		$.each(
+				data,
+				function(index, obj) {
 							blist += "<tr>";
 							blist += "<td>" + obj.idx + "</td>";
 							blist += "<td id='t"+obj.idx+"'><a href = 'javascript:goContent(﻿"+ obj.idx + ")'>" + obj.title + "</a></td>";
@@ -57,15 +79,15 @@
 							blist += "<td>" + obj.indate + "</td>";
 							blist += "<td id = 'count"+obj.idx+"'>" + obj.count + "</td>";
 
-							if(${!empty mvo}){ <!-- 로그인에 성공했을 때 -->
-								if("${mvo.memId}"==obj.memId){ <!-- 로그인한 아이디 == 게시글 작성한 아이디 -->
+							if(${!empty mvo}){ // 로그인에 성공했을 때 
+								if("${mvo.memId}"==obj.memId){ // 로그인한 아이디 == 게시글 작성한 아이디 
 									blist += "<td id='u"+obj.idx+"'><button class = 'btn btn-info btn-sm' onclick='goUpdate("+ obj.idx + ")'>수정</button></td>";
 									blist += "<td><button class = 'btn btn-warning btn-sm' onclick='goDelete("+ obj.idx + ")'>삭제</button></td>";
-								}else{ <!-- 로그인한 아이디 != 게시글 작성한 아이디 -->
+								}else{ // 로그인한 아이디 != 게시글 작성한 아이디
 									blist += "<td id='u"+obj.idx+"'><button disabled class = 'btn btn-info btn-sm' onclick='goUpdate("+ obj.idx + ")'>수정</button></td>";
 									blist += "<td><button disabled class = 'btn btn-warning btn-sm' onclick='goDelete("+ obj.idx + ")'>삭제</button></td>";
 								}
-							}else{ <!-- 로그인에 실패했을 때 -->
+							}else{ // 로그인에 실패했을 때
 							blist += "<td id='u"+obj.idx+"'><button disabled class = 'btn btn-info btn-sm' onclick='goUpdate("+ obj.idx + ")'>수정</button></td>";
 							blist += "<td><button disabled class = 'btn btn-warning btn-sm' onclick='goDelete("+ obj.idx + ")'>삭제</button></td>";
 							}
@@ -108,6 +130,45 @@
 		$(".blist").html(blist);
 	}
 
+	
+	// 게시물 리스트의 수정 버튼 goUpdate()======================================================
+	function goUpdate(idx) {
+		// 제목이 text칸으로!
+		var title = $("#t" + idx).text();
+		var newTitle = "<input type='text' id='nt"+idx+"' class = 'form-control' value = '"+title+"'>";
+		$("#t" + idx).html(newTitle);
+
+		// 작성자가 text칸으로!
+		var writer = $("#w" + idx).text();
+		var newWriter = "<input type='text' id='nw"+idx+"' class = 'form-control' value = '"+writer+"'>";
+		$("#w" + idx).html(newWriter);
+
+		// 수정 버튼이 수정하기 버튼으로!
+		var newUpdate = "<button class='btn btn-success btn-sm' onclick='update("
+				+ idx + ")'>수정하기</button>"
+		$("#u" + idx).html(newUpdate);
+	}
+
+
+	// 수정하기 버튼 update()================================================================
+	function update(idx) { // idx, title, writer
+		var title = $("#nt" + idx).val();
+		var writer = $("#nw" + idx).val();
+		$.ajax({
+			url : "boardTWUpdateAjax.do",
+			type : "post",
+			data : {
+				"idx" : idx,
+				"title" : title,
+				"writer" : writer
+			},
+			success : loadList,
+			error : function() {
+				alert("error")
+			}
+		});
+	}
+	
 	// 글쓰기 버튼을 눌렀을 때 글쓰기 화면이 나오게 하는 함수 goForm=========================================
 	function goForm() {
 		if ($(".rform").css("display") == "block") {
@@ -139,51 +200,7 @@
 		// 글쓰기 완료시 글쓰기 창이 숨겨지도록.
 		$(".rform").css("display", "none");
 	}
-
-	// 제목을 눌렀을 때 내용이 보이는 함수 goContent()===============================================
-	function goContent(idx) {
-		if ($("#cv" + idx).css("display") == "none") {
-			$("#cv" + idx).css("display", "table-row"); //-> block보다 table-row가 내용칸을 더 넓게 보여준다.
-		} else {
-			$("#cv" + idx).css("display", "none");
-		}
-		
-		// 조회수 누적
-		if($("#cv" + idx).css("display") != "none") { // != "none" -> display가 열려있는 경우
-			$.ajax({
-				url : "/web/boardCountAjax.do", // boardCountAjax.do로 가자
-				type : "get",
-				data : {"idx" : idx}, // 사용자가 누른 idx를 count를 업데이트해줘
-				dataTyep : "json",
-				success : function(data){$("#count"+idx.text(data.count);}, // data = 조회수
-				error : function(){alert("error");}
-			});
-		}
-	}
-
-	// 닫기 버튼을 눌렀을 때 수정창이 닫아지는 함수goClose()===========================================
-	function goClose(idx) {
-		$("#cv" + idx).css("display", "none");
-	}
-
-	// 수정버튼이 눌렸을 때 수정된 내용이 저장되는 함수upClick()========================================
-	function upClick(idx) { // idx와 content를 가져오자
-		var contents = $("#c" + idx).val();
-		$.ajax({
-			url : "boardContentUpdateAjax.do",
-			type : "post",
-			data : {
-				"idx" : idx,
-				"contents" : contents
-			},
-			success : loadList,
-			error : function() {
-				alert("error");
-			}
-		});
-
-	}
-
+	
 	// 게시물 리스트의 삭제 버튼 goDelete()======================================================
 	function goDelete(idx) {
 		$.ajax({
@@ -199,41 +216,31 @@
 		});
 	}
 
-	// 게시물 리스트의 수정 버튼 goUpdate()======================================================
-	function goUpdate(idx) {
-		// 제목이 text칸으로!
-		var title = $("#t" + idx).text();
-		var newTitle = "<input type='text' id='nt"+idx+"' class = 'form-control' value = '"+title+"'>";
-		$("#t" + idx).html(newTitle);
-
-		// 작성자가 text칸으로!
-		var writer = $("#w" + idx).text();
-		var newWriter = "<input type='text' id='nw"+idx+"' class = 'form-control' value = '"+writer+"'>";
-		$("#w" + idx).html(newWriter);
-
-		// 수정 버튼이 수정하기 버튼으로!
-		var newUpdate = "<button class='btn btn-success btn-sm' onclick='update("
-				+ idx + ")'>수정하기</button>"
-		$("#u" + idx).html(newUpdate);
+	
+	// 닫기 버튼을 눌렀을 때 수정창이 닫아지는 함수goClose()===========================================
+	function goClose(idx) {
+		$("#cv" + idx).css("display", "none");
 	}
 
-	// 수정하기 버튼 update()================================================================
-	function update(idx) { // idx, title, writer
-		var title = $("#nt" + idx).val();
-		var writer = $("#nw" + idx).val();
-		$.ajax({
-			url : "boardTWUpdateAjax.do",
-			type : "post",
-			data : {
-				"idx" : idx,
-				"title" : title,
-				"writer" : writer
-			},
-			success : loadList,
-			error : function() {
-				alert("error")
-			}
-		});
+	// 제목을 눌렀을 때 내용이 보이는 함수 goContent()===============================================
+	function goContent(idx) {
+		if ($("#cv" + idx).css("display") == "none") {
+			$("#cv" + idx).css("display", "table-row"); //-> block보다 table-row가 내용칸을 더 넓게 보여준다.
+		} else {
+			$("#cv" + idx).css("display", "none");
+		}
+		
+		// 조회수 누적
+		if($("#cv" + idx).css("display") != "none") { // != "none" -> display가 열려있는 경우
+			$.ajax({
+				url : "boardCountAjax.do", // boardCountAjax.do로 가자
+				type : "get",
+				data : {"idx" : idx}, // 사용자가 누른 idx를 count를 업데이트해줘
+				dataTyep : "json",
+				success : function(data){$("#count"+idx).text(data.count);}, // data = 조회수
+				error : function(){alert("error");}
+			});
+		}
 	}
 </script>
 </head>

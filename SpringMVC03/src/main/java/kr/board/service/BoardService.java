@@ -37,7 +37,7 @@ public class BoardService {
 		mapper.boardDelete(idx);
 	}
 	
-	// 게시물 리스트에서 제목과 작성자 수정하기
+	// 게시물 리스트에서 제목(Title)과 작성자(Writer) 수정하기
 	public void boardTWUpdateAjax(Board vo) {
 		mapper.boardTWUpdateAjax(vo);
 	}
@@ -52,9 +52,9 @@ public class BoardService {
 		// 1. 조회수를 업데이트해주고
 		mapper.boardCountAjax(idx);
 		
-		// 2. 다시 게시판 정보를 가져온다.
-
-		return null;
+		// 2. 조회수가 +1로 업데이트된 다시 게시판 정보를 가져온다.
+		Board vo = mapper.boardContent(idx);
+		return vo;
 	}
 
 }
