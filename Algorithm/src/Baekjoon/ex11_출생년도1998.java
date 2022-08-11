@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex11_BornIn1998 {
+public class ex11_출생년도1998 {
 
 	public static void main(String[] args) {
 
