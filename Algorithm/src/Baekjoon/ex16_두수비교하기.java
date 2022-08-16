@@ -8,7 +8,6 @@ public class ex16_두수비교하기 {
 
 		
 		Scanner sc = new Scanner(System.in);
-		
 		int a = sc.nextInt();
 		int b = sc.nextInt();
 		
