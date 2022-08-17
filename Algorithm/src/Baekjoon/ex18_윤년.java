@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex18_윤년 { 
+public class ex18_윤년 {  
 
 	public static void main(String[] args) {
 
