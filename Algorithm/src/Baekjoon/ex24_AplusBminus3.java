@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex24_AB3 {
+public class ex24_AplusBminus3 {
 
 	public static void main(String[] args) {
 
