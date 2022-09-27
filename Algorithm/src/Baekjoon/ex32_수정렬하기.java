@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class ex32_수정렬하기 {
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -19,7 +19,11 @@ public class ex32_수정렬하기 {
 		}
 		
 		Arrays.sort(arr);
-		System.out.println(Arrays.toString(arr));
+		// System.out.println(Arrays.toString(arr)); // list형태로 출력됨
+		
+		for(int val : arr) {
+			System.out.println(val);
+		}
 	}
 
 }
