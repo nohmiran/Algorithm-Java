@@ -28,17 +28,17 @@ public class ex57_좋은암호 {
 		// 인수분해 소수가 L보다 작을 경우 해당 소수 저장할 변수
 		int N = 0;
 
-		// 만약 L이 int 형을 벗어난 값을 입력 받을 수 있다면 컴파일 오류가 나겠지만, 1000000이기에 가능
 		for (int i = 2; i < L.intValue(); i++) { 
-			// L.intValue() : i는 int, L은 BigInteger 타입이기 떄문에 형변환.
+		// L.intValue() : i는 int, L은 BigInteger 타입이기 떄문에 형변환.
 
 			// K에 i를 나눠서 나머지가 0이 나오면 이라는 조건을 사용
 //			if (K % i == 0) {
-			if ((K.remainder(BigInteger.valueOf(i))).compareTo(BigInteger.ZERO) == 0) {
+			if ((K.remainder(BigInteger.valueOf(i))).compareTo(BigInteger.ZERO) == 0) { // 솔직히 이건 뭔지 모르게씀..
 				N = i;
 				break;
 			}
 		}
+		
 		// 삼항연산자
 		// N이 0보다 클 경우 "BAD"와 N값 출력
 		// N이 0보다 작은 경우 "GOOD" 출력
