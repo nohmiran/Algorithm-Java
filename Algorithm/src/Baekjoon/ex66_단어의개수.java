@@ -1,14 +1,16 @@
 package Baekjoon;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class ex66_단어의개수 {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String str = br.readLine();
 
-		String str = sc.nextLine();
-		
 		StringTokenizer st = new StringTokenizer(str, " ");
 
 		System.out.println(st.countTokens()); // countTokens() : 토큰의 개수
