@@ -13,7 +13,7 @@ public class ex74_세수 {
 		
 		Arrays.sort(arr); // 오름차순 정렬
 		
-		System.out.println(arr[1]);
+		System.out.println(arr[1]); // 두 번째로 큰 수 출력
 		
 		
 	}
