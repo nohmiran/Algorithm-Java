@@ -2,11 +2,11 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex92_KMP는왜KMP일까 {
+public class ex92_KMP는왜KMP일까 { 
 
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); 
 		String str1 = sc.next();
 		
 		String[] word = str1.split("-");
