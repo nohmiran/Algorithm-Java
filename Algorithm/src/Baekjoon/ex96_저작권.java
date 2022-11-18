@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex96_단어공부 {
+public class ex96_저작권 {
 
 	public static void main(String[] args) {
 
