@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex103_플러그 {
+public class ex104_플러그 {
 
 	public static void main(String[] args) {
 
