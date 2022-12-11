@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class ex56_덧셈과곱셈 {
+public class ex056_덧셈과곱셈 {
 	public static void main(String[] args) throws IOException {
 
 		// 등차수열? : 연속하는 두 항의 차이가 모두 일정한 수열

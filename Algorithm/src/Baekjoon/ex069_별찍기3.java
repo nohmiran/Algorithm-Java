@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.*;
 
-public class ex69_별찍기3 {
+public class ex069_별찍기3 {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);

@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex65_숫자의개수 {
+public class ex065_숫자의개수 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

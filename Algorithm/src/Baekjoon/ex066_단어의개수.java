@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class ex66_단어의개수 {
+public class ex066_단어의개수 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str = br.readLine();

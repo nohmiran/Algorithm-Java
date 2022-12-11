@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex54_사장님도박은재미로하셔야합니다 {
+public class ex054_사장님도박은재미로하셔야합니다 {
 	public static void main(String[] args) {
 
 		// 야바위의 수가 더해지는 변수를 하나 지정하고,

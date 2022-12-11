@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class ex57_좋은암호 {
+public class ex057_좋은암호 {
 
 	public static void main(String[] args) throws IOException {
 
