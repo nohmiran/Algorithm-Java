@@ -6,7 +6,7 @@ public class ex135_팰린드롬수 {
 
 	public static void main(String[] args) {
 		
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); 
 		
 		while (true) {
 			int num = sc.nextInt();
@@ -15,7 +15,6 @@ public class ex135_팰린드롬수 {
 				break;
 			
 			} else {
-				
 				int count = 0;
 				String str = Integer.toString(num);
 				
