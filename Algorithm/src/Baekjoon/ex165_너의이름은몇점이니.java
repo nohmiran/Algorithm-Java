@@ -8,8 +8,8 @@ public class ex165_너의이름은몇점이니 {
 		
 		Scanner sc = new Scanner(System.in);
 
-		int length = sc.nextInt();
-		String name = sc.next();
+		int length = sc.nextInt(); // 이름의 길이
+		String name = sc.next(); // 이름
 
 		int result = 0; // 점수 합산할 변수
 
