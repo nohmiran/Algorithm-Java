@@ -17,17 +17,17 @@ public class ex173_0의개수 {
 			int num1 = sc.nextInt();
 			int num2 = sc.nextInt();
 
-			int count = 0;
+			int count = 0; // 개수 count할 변수
 
 			for (int j = num1; j <= num2; j++) {
 				int t = j;
-				if (t == 0) {
-					count++;
+				if (t == 0) { // 0이라면
+					count++; // +1
 					continue;
 				}
 				while (t > 1) {
-					if (t % 10 == 0) {
-						count++;
+					if (t % 10 == 0) { // 10으로 나눴을 때 나머지가 0이라면
+						count++; // 10의 배수이니까 +1
 					}
 					t /= 10;
 				}
