@@ -1,4 +1,6 @@
-public class Main {
+package Baekjoon;
+
+public class ex174_NFCWestVSNorth {
     public static void main(String[] args) {
         System.out.println("NFC West       W   L  T\n" +
               "-----------------------\n" +
