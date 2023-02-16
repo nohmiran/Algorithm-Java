@@ -13,5 +13,4 @@ public class ex182_홍익대학교 {
 		System.out.println(since - 1946);
 	
 	}
-
 }
