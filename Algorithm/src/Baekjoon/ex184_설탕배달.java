@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex184 {
+public class ex184_설탕배달 {
 
 	public static void main(String[] args) {
 
