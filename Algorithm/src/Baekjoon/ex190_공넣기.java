@@ -35,10 +35,10 @@ public class ex190_공넣기 {
 			}
 		}
 
+		// 1번 바구니부터 N번 바구니에 들어있는 공의 번호를 공백으로 구분해 출력
+		// 공이 들어있지 않은 바구니는 0을 출력
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-
 	}
-
 }
