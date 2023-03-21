@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ex214_문자와문자열 {
+	
 	public static void main(String[] args) throws IOException {
         
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
