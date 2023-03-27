@@ -16,6 +16,7 @@ public class ex217_벌집 {
 
         if (num == 1) {
             System.out.println(1);
+        
         } else {
             while (range <= num) {
                 range = range + (6 * meter);
