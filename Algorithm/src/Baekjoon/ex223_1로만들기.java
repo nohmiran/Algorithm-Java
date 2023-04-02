@@ -1,8 +1,10 @@
+package Baekjoon;
+
 import java.util.Scanner;
 
 public class ex223_1로만들기 {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         
      Scanner sc = new Scanner(System.in);
 
