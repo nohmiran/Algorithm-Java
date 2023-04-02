@@ -1,4 +1,6 @@
-import java.util.*;
+package Baekjoon;
+
+import java.util.Scanner;
 
 public class ex225_진법변환 {
 
@@ -10,19 +12,19 @@ public class ex225_진법변환 {
 		int num = sc.nextInt();
 		int temp = 1;
 		int result = 0;
-		
+
 		for (int i = str.length() - 1; i >= 0; i--) {
 			char c = str.charAt(i);
-			
-			if('A'<= c && c <= 'Z') {
+
+			if ('A' <= c && c <= 'Z') {
 				result += (c - 'A' + 10) * temp;
-			}else {
+			} else {
 				result += (c - '0') * temp;
 			}
 			temp *= num;
 		}
-		
+
 		System.out.println(result);
-		
+
 	}
 }
