@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.*;
 
-public class Main {
+public class ex230_제로 {
     
 	public static void main(String[] args) {
         
