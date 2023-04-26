@@ -1,3 +1,5 @@
+package Baekjoon;
+
 import java.util.Scanner;
 
 public class ex245_팩토리얼2 {
