@@ -1,3 +1,5 @@
+package Baekjoon;
+
 import java.util.Scanner;
 
 public class ex244_베라의패션 {
