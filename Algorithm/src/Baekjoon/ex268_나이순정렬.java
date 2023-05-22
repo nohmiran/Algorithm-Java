@@ -9,12 +9,12 @@ public class ex268_나이순정렬 {
 		String[] arr = new String[201];
 		Set<Integer> ages = new HashSet<>();
         
-		int num = sc.nextInt();
+		int num = sc.nextInt(); // 입력할 회원 수
         
 		for (int i = 0; i < num; i++) {
             
-			int age = sc.nextInt();
-			String name = sc.next();
+			int age = sc.nextInt(); // 나이 입력
+			String name = sc.next(); // 이름 입력
             
 			if (arr[age] == null) {
 				arr[age] = age + " " + name + "\n";
