@@ -1,4 +1,4 @@
-import java.util.*;
+package Baekjoon;
 
 public class ex268_나이순정렬 {
 
