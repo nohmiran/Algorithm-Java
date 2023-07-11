@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class 317_N번째큰수 {
+public class ex317_N번째큰수 {
 
 	public static void main(String[] args) {
         
