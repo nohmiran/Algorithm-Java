@@ -1,3 +1,5 @@
+package Baekjoon;
+
 import java.util.*;
 
 public class ex329_WhoIsInTheMiddle {
