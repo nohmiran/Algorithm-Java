@@ -2,7 +2,7 @@ package Baekjoon;
 
 import java.util.Scanner;
 
-public class ex401_HI-ARC {
+public class ex402_HI-ARC {
     
     public static void main(String[] args) {
         
