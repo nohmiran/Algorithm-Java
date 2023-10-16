@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 
-public class ex413_팩토리얼3 {
+public class ex414_팩토리얼3 {
   
     public static void main(String[] args) throws IOException {
       
