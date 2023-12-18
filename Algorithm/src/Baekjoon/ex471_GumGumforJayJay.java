@@ -3,7 +3,7 @@ package Baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class ex470_GumGumforJayJay {
+public class ex471_GumGumforJayJay {
     
     public static void main(String[] args) throws Exception {
         
