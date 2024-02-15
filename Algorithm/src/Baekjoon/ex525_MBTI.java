@@ -1,6 +1,8 @@
+package Baekjoon;
+
 import java.util.*;
 
-public class Main {
+public class ex525_MBTI {
 
     public static void main(String[] args) {
         
