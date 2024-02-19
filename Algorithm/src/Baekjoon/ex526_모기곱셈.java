@@ -1,39 +1,41 @@
 package Baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class ex526_모기곱셈 {
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws IOException {
 		
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		String s = "";
+		while (true) {
+			String str = br.readLine();
 		
-		while((s = in.readLine())!=null) {
-			
-			String[] split = in.readLine().split(" ");
-			
-			int M = Integer.parseInt(split[0]); // M: 첫째 주 모기 수
-			int P = Integer.parseInt(split[1]); // P: 번데기 수
-			int L = Integer.parseInt(split[2]); // L: 유충 수
-			
-			int E = Integer.parseInt(split[3]); // E: 한 모기가 낳는 알의 수 
-			
-			int R = Integer.parseInt(split[4]); // R: 유충 비율
-			int S = Integer.parseInt(split[5]); // S: 번데기 비율
-			int N = Integer.parseInt(split[6]); // N: 모기 수를 구하려는 시점 
-			
+			if (str == null)
+				return;
+		
+			StringTokenizer st = new StringTokenizer(str, " ");
+		
+			long    M = Long.parseLong(st.nextToken()), //모기의 수
+					Mp = M,		//저번 주의 모기 수
+					P = Long.parseLong(st.nextToken()), //번데기 수
+					L = Long.parseLong(st.nextToken()), //유충 수
+					E = Long.parseLong(st.nextToken()), //성충 모기가 낳는 알
+					R = Long.parseLong(st.nextToken()), //유충->번데기 몇번째 유충만 사는지
+					S = Long.parseLong(st.nextToken()), //번데기->성충 몇번째 번데기만 사는지
+					N = Long.parseLong(st.nextToken()); //몇 주가 지난 시점인지
+		
 			for(int i = 0; i < N; i++) {
-				int tmp = M;
+				Mp = M;
 				M = P / S;
 				P = L / R;
-				L = tmp * E;
+				L = Mp * E;
 			}
-			sb.append(M).append("\n");
+		
+			System.out.println(M);
 		}
-		System.out.println(sb); // sb: N번 째 일요일 후 모기 수
 	}
 }
